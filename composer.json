@@ -1,0 +1,24 @@
+{
+    "name": "luizdev/curso-mvc",
+    "description": "Curso de MVC com PHP",
+    "license": "proprietary",
+    "autoload": {
+        "psr-4": {
+            "app\\": "app/",
+            "core\\": "core/"
+        },
+        "files": [
+            "config/config.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "luiizsilverio",
+            "email": "luiiz.silverio@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=7.2"
+    }
+}
