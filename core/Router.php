@@ -10,7 +10,12 @@ class Router {
 
   public function __construct() {
     $router = $this->url();
-    print_r( $router );
+    
+    if (file_exists('app/controllers/' . ucfirst($router[0]) . '.php')) {
+      echo $router[0] . ' existe!';
+    } else {
+      echo $router[0] . ' não existe!';
+    }
   }
 
   private function url() {
