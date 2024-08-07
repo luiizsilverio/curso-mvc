@@ -31,6 +31,19 @@ class User extends Connection {
     return $result;
   }
 
+  public function getById($id) {
+    $conn = $this->connect();
+    $sql = "SELECT * FROM tb_person WHERE id = :id";
+    $query = $conn->prepare($sql);
+    $query->bindParam(':id', $id);
+    $query->execute();
+    $result = $query->fetchAll();
+    if (count($result) > 0)
+      return $result[0];
+    else
+      return false;
+  }
+
   public function update() {
 
   }

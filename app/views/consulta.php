@@ -17,8 +17,8 @@
             <td><?= $user['email']; ?></td>
             <td><?= $user['tel']; ?> </td>
             <td>
-              <a href="?router=Site/edit/&id=<?= $user['id']; ?>">Alterar</a> |
-              <a href="?router=Site/delete/&id=<?= $user['id']; ?>">Excluir</a>
+              <a href="?router=Site/editar/&id=<?= $user['id']; ?>">Alterar</a> |
+              <a href="?router=Site/excluir/&id=<?= $user['id']; ?>" class="red-text">Excluir</a>
             </td>
           </tr>
         <?php } ?>
