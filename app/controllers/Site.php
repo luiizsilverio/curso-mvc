@@ -20,6 +20,7 @@ class Site extends User {
     require_once __DIR__ . '/../views/galeria.php';
   }
 
+  
   // http://localhost/curso-mvc/?router=site/cadastro
   public function cadastro() {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -28,7 +29,7 @@ class Site extends User {
       $tel   = filter_input(INPUT_POST, 'tel',   FILTER_SANITIZE_SPECIAL_CHARS);
 
       if (!$nome || !$email) {
-        alert("Informe o nome e o e-mail");
+        $erro = "Informe o nome e o e-mail";
         require_once __DIR__ . '/../views/cadastro.php';
       }
       else {
@@ -41,16 +42,19 @@ class Site extends User {
     }
   }
   
+
   // http://localhost/curso-mvc/?router=site/consulta
   public function consulta() {
     $users = $this->getAll();
     require_once __DIR__ . '/../views/consulta.php';
   }
 
+
   // http://localhost/curso-mvc/?router=Site/editar/&id=3
   public function editar() {
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-      $id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_SPECIAL_CHARS);
+      $id   = filter_input(INPUT_GET, "id",   FILTER_SANITIZE_SPECIAL_CHARS);
+      $erro = filter_input(INPUT_GET, "erro", FILTER_SANITIZE_SPECIAL_CHARS);
       $user = $this->getById($id);
 
       if (!$user) {
@@ -65,12 +69,14 @@ class Site extends User {
       $nome  = filter_input(INPUT_POST, 'nome',  FILTER_SANITIZE_SPECIAL_CHARS);
       $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
       $tel   = filter_input(INPUT_POST, 'tel',   FILTER_SANITIZE_SPECIAL_CHARS);
+      $voltar = $_POST['voltar']; 
 
-      if (!$id) {
+      if ($voltar || !$id) {
         $this->consulta();
       }
       elseif (!$nome || !$email) {
-        header("Location:?router=Site/editar/&id={$id}");
+        $erro = "Informe o nome e o e-mail";
+        header("Location:?router=Site/editar/&id={$id}&erro={$erro}");
       }
       else {
         $this->update($id, $nome, $email, $tel);
@@ -78,6 +84,7 @@ class Site extends User {
       }
     }
   }
+
 
   public function excluir() {
     $id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_SPECIAL_CHARS);
@@ -87,6 +94,7 @@ class Site extends User {
 
     header("Location:?router=Site/consulta/");
   }
+
 
   public function confirmaExcluir() {
     $id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_SPECIAL_CHARS);

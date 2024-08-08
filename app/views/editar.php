@@ -21,9 +21,14 @@
       </div>
 
       <div class="input-field col s12">
+        <?php if ($erro) { ?>
+          <p class="red-text"><?= $erro; ?></p>
+        <?php } ?>
         <input type="hidden" name="id" value="<?= $user['id']; ?>">
-        <input type="submit" value="Confirmar" class="btn-small">
-        <input type="reset" value="limpar" class="btn-small red">
+        <input type="submit" value="confirmar" class="btn-small">
+        <input type="submit" value="voltar" name="voltar"
+          class="btn-small waves-light white black-text"
+        >
       </div>
     </form>
   </div>
